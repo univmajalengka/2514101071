@@ -1,6 +1,5 @@
 # 2514101071
 
-Repository tugas kuliah.
 
 ## Identitas
 
@@ -12,13 +11,6 @@ Repository tugas kuliah.
 | Fakultas | Teknik |
 | Universitas | Universitas Majalengka |
 
-## Struktur Repository
-
-```
-2514101071/
-└── Tugas Pertemuan 3/
-    └── index.html   # UI promosi wisata Terasering Panyaweuyan
-```
 
 ## Tugas Pertemuan 3
 
