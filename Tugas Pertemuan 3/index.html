@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terasering Panyaweuyan - Majalengka</title>
+<style>
+  :root {
+    --hijau: #2f6b3a;
+    --hijau-tua: #1e4726;
+    --emas: #d9a441;
+    --krem: #fbf7ee;
+    --abu: #6b7280;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #24302a;
+    background: var(--krem);
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(rgba(30,71,38,.85), rgba(30,71,38,.85)),
+                repeating-linear-gradient(135deg, #3c7d47 0 22px, #47904f 22px 44px);
+    color: #fff;
+  }
+  nav {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 18px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand { font-weight: 700; letter-spacing: .5px; }
+  nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  nav a { color: #eaf5ec; text-decoration: none; font-size: .95rem; }
+  nav a:hover { color: var(--emas); }
+
+  .hero {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 20px 24px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 2.1rem; color: var(--hijau-tua); }
+  .hero p { color: var(--abu); max-width: 640px; margin: 10px auto 0; }
+  .tag {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 4px 14px;
+    border: 1px solid var(--emas);
+    border-radius: 999px;
+    color: #8a6520;
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  section { max-width: 1000px; margin: 0 auto; padding: 26px 20px; }
+  h2 {
+    font-size: 1.4rem;
+    color: var(--hijau-tua);
+    border-left: 5px solid var(--emas);
+    padding-left: 12px;
+    margin-bottom: 18px;
+  }
+
+  .foto-slot, .kartu-gambar {
+    background: #e8e3d6;
+    border: 2px dashed #b9b1a0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--abu);
+    text-align: center;
+    font-size: .9rem;
+  }
+  .foto-slot { aspect-ratio: 16/10; border-radius: 8px; }
+
+  .galeri {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  }
+  .video-wrap iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  .video-wrap .fallback { color: #bbb; padding: 20px; }
+  .video-note { font-size: .85rem; color: var(--abu); margin-top: 10px; }
+
+  .paket {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .kartu {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .kartu-gambar { aspect-ratio: 4/3; border: 0; border-bottom: 2px dashed #b9b1a0; }
+  .kartu-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .kartu-body h3 { color: var(--hijau); font-size: 1.1rem; }
+  .kartu-body p { font-size: .93rem; color: #4b5563; flex: 1; }
+  .harga { font-weight: 700; color: #8a6520; }
+
+  footer {
+    background: var(--hijau-tua);
+    color: #d7e6d9;
+    text-align: center;
+    padding: 26px 20px;
+    margin-top: 30px;
+    font-size: .92rem;
+  }
+  footer strong { color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <span class="brand">Terasering Panyaweuyan</span>
+    <ul>
+      <li><a href="#beranda">Beranda</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+      <li><a href="#paket">Paket Wisata</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="beranda">
+    <span class="tag">Majalengka - Jawa Barat</span>
+    <h1>Terasering Panyaweuyan</h1>
+    <p>
+      Pesona hamparan sawah berterasering yang membentang di kaki Gunung Ciremai.
+      Nikmati udara sejuk, pemandangan hijau, dan suasana desa yang tenang
+      bersama keluarga maupun teman perjalanan.
+    </p>
+  </section>
+
+  <section id="galeri">
+    <h2>Foto Kegiatan Wisata</h2>
+    <div class="galeri">
+      <div class="foto-slot">Foto kegiatan 1<br>menyusul</div>
+      <div class="foto-slot">Foto kegiatan 2<br>menyusul</div>
+      <div class="foto-slot">Foto kegiatan 3<br>menyusul</div>
+      <div class="foto-slot">Foto kegiatan 4<br>menyusul</div>
+      <div class="foto-slot">Foto kegiatan 5<br>menyusul</div>
+      <div class="foto-slot">Foto kegiatan 6<br>menyusul</div>
+    </div>
+  </section>
+
+  <section id="video">
+    <h2>Video Kegiatan Wisata</h2>
+    <div class="video-wrap">
+      <iframe
+        src="https://drive.google.com/file/d/1QBB7keKr22TvTXhZlY41shgzt4roztX2/preview"
+        title="Video Kegiatan Wisata Terasering Panyaweuyan"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <p class="video-note">
+      Video diunggah melalui Google Drive.
+      <a href="https://drive.google.com/file/d/1QBB7keKr22TvTXhZlY41shgzt4roztX2/view?usp=sharing"
+         target="_blank" rel="noopener">Buka di tab baru</a>
+      jika video tidak tampil (pastikan akses video disetel publik).
+    </p>
+  </section>
+
+  <section id="paket">
+    <h2>Daftar Paket Wisata</h2>
+    <div class="paket">
+      <article class="kartu">
+        <div class="kartu-gambar">Foto paket<br>menyusul</div>
+        <div class="kartu-body">
+          <h3>Paket Santai Keluarga</h3>
+          <p>
+            Berjalan santai menikmati pemandangan terasering, berfoto di spot
+            favorit, dan menikmati hidangan khas desa bersama keluarga.
+          </p>
+          <span class="harga">Rp 75.000 / orang</span>
+        </div>
+      </article>
+
+      <article class="kartu">
+        <div class="kartu-gambar">Foto paket<br>menyusul</div>
+        <div class="kartu-body">
+          <h3>Paket Sunrise Trekking</h3>
+          <p>
+            Perjalanan pagi menyusuri jalur terasering untuk menyaksikan matahari
+            terbit di atas hamparan sawah dan kabut Gunung Ciremai.
+          </p>
+          <span class="harga">Rp 120.000 / orang</span>
+        </div>
+      </article>
+
+      <article class="kartu">
+        <div class="kartu-gambar">Foto paket<br>menyusul</div>
+        <div class="kartu-body">
+          <h3>Paket Fotografi &amp; Kuliner</h3>
+          <p>
+            Tur khusus pemburu foto dengan pemandu lokal, dilanjutkan mencicipi
+            kuliner khas Majalengka di akhir perjalanan.
+          </p>
+          <span class="harga">Rp 150.000 / orang</span>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer id="kontak">
+  <p><strong>Terasering Panyaweuyan</strong> - Majalengka, Jawa Barat</p>
+  <p>Disusun oleh Aulia Rahman - NPM 2514101071</p>
+  <p>Program Studi Informatika, Fakultas Teknik, Universitas Majalengka</p>
+</footer>
+
+</body>
+</html>
