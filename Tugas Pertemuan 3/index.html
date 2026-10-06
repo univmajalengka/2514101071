@@ -114,6 +114,7 @@
     transition: transform .4s ease;
   }
   .foto-riil:hover img { transform: scale(1.05); }
+  .foto-riil { cursor: zoom-in; }
   .foto-riil figcaption {
     position: absolute;
     left: 0; right: 0; bottom: 0;
@@ -178,6 +179,57 @@
     font-size: .92rem;
   }
   footer strong { color: #fff; }
+
+  /* Lightbox foto */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(10,22,14,.93);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+  }
+  .lightbox.tampil { display: flex; }
+  .lightbox img {
+    max-width: min(92vw, 1100px);
+    max-height: 82vh;
+    border-radius: 10px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.55);
+    object-fit: contain;
+  }
+  .lb-btn {
+    position: absolute;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.35);
+    color: #fff;
+    font-size: 1.3rem;
+    line-height: 1;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s ease;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.3); }
+  .lb-tutup { top: 18px; right: 18px; }
+  .lb-sebelumnya { left: 18px; top: 50%; transform: translateY(-50%); }
+  .lb-berikutnya { right: 18px; top: 50%; transform: translateY(-50%); }
+  .lb-kap {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #fff;
+    font-size: .95rem;
+    text-shadow: 0 1px 8px rgba(0,0,0,.7);
+    padding: 0 70px;
+  }
 </style>
 </head>
 <body>
@@ -208,6 +260,7 @@
 
   <section id="galeri">
     <h2>Foto Kegiatan Wisata</h2>
+    <p style="color: var(--abu); font-size: .92rem; margin: -10px 0 16px;">Klik foto untuk memperbesar.</p>
     <div class="galeri">
       <figure class="foto-slot foto-riil">
         <img src="foto/pemandangan.jpg" alt="Pengunjung duduk di atas bangku bambu menikmati kabut pagi" loading="lazy">
@@ -286,6 +339,67 @@
   <p>Disusun oleh Aulia Rahman - NPM 2514101071</p>
   <p>Program Studi Informatika, Fakultas Teknik, Universitas Majalengka</p>
 </footer>
+
+<!-- Lightbox foto -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-btn lb-tutup" id="lbTutup" aria-label="Tutup foto">&#10005;</button>
+  <button class="lb-btn lb-sebelumnya" id="lbSebelumnya" aria-label="Foto sebelumnya">&#10094;</button>
+  <img src="" alt="" id="lbImg">
+  <button class="lb-btn lb-berikutnya" id="lbBerikutnya" aria-label="Foto berikutnya">&#10095;</button>
+  <div class="lb-kap" id="lbKap"></div>
+</div>
+
+<script>
+(function () {
+  var foto = Array.prototype.slice.call(document.querySelectorAll('.foto-riil'));
+  if (!foto.length) return;
+
+  var box = document.getElementById('lightbox');
+  var img = document.getElementById('lbImg');
+  var kap = document.getElementById('lbKap');
+  var indeks = 0;
+
+  function tampilkan(i) {
+    indeks = (i + foto.length) % foto.length;
+    var f = foto[indeks];
+    var sumber = f.querySelector('img');
+    var judul = f.querySelector('figcaption');
+    img.src = sumber.src;
+    img.alt = sumber.alt;
+    kap.textContent = judul ? judul.textContent : '';
+    box.classList.add('tampil');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function tutup() {
+    box.classList.remove('tampil');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  foto.forEach(function (f, i) {
+    f.addEventListener('click', function () { tampilkan(i); });
+  });
+
+  document.getElementById('lbTutup').addEventListener('click', tutup);
+  document.getElementById('lbSebelumnya').addEventListener('click', function (e) {
+    e.stopPropagation(); tampilkan(indeks - 1);
+  });
+  document.getElementById('lbBerikutnya').addEventListener('click', function (e) {
+    e.stopPropagation(); tampilkan(indeks + 1);
+  });
+  box.addEventListener('click', function (e) {
+    if (e.target === box) tutup();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!box.classList.contains('tampil')) return;
+    if (e.key === 'Escape') tutup();
+    if (e.key === 'ArrowLeft') tampilkan(indeks - 1);
+    if (e.key === 'ArrowRight') tampilkan(indeks + 1);
+  });
+})();
+</script>
 
 </body>
 </html>
