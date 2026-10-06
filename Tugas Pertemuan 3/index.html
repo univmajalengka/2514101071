@@ -41,20 +41,36 @@
   nav a:hover { color: var(--emas); }
 
   .hero {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 48px 20px 24px;
+    max-width: none;
+    position: relative;
+    background: url("foto/pemandangan.jpg") center 62%/cover no-repeat, var(--hijau-tua);
+    color: #fff;
     text-align: center;
+    padding: 110px 20px 84px;
+    overflow: hidden;
   }
-  .hero h1 { font-size: 2.1rem; color: var(--hijau-tua); }
-  .hero p { color: var(--abu); max-width: 640px; margin: 10px auto 0; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15,40,22,.35), rgba(15,40,22,.8));
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .hero h1 {
+    font-size: 2.4rem;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,.5);
+    margin-top: 6px;
+  }
+  .hero p { color: rgba(255,255,255,.92); max-width: 640px; margin: 12px auto 0; }
   .tag {
     display: inline-block;
     margin-bottom: 12px;
     padding: 4px 14px;
-    border: 1px solid var(--emas);
+    border: 1px solid rgba(255,255,255,.75);
     border-radius: 999px;
-    color: #8a6520;
+    background: rgba(0,0,0,.28);
+    color: #fff;
     font-size: .82rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -81,6 +97,33 @@
   }
   .foto-slot { aspect-ratio: 16/10; border-radius: 8px; }
 
+  .foto-riil {
+    position: relative;
+    display: block;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,.12);
+  }
+  .foto-riil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 72%;
+    display: block;
+    transition: transform .4s ease;
+  }
+  .foto-riil:hover img { transform: scale(1.05); }
+  .foto-riil figcaption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 34px 14px 12px;
+    background: linear-gradient(transparent, rgba(0,0,0,.75));
+    color: #fff;
+    font-size: .88rem;
+    text-align: left;
+  }
+
   .galeri {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -95,13 +138,16 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    margin: 0 auto;
   }
-  .video-wrap iframe {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    border: 0;
+  .video-wrap.portrait { aspect-ratio: 9/16; max-width: 400px; }
+  .video-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #000;
   }
-  .video-wrap .fallback { color: #bbb; padding: 20px; }
   .video-note { font-size: .85rem; color: var(--abu); margin-top: 10px; }
 
   .paket {
@@ -163,7 +209,10 @@
   <section id="galeri">
     <h2>Foto Kegiatan Wisata</h2>
     <div class="galeri">
-      <div class="foto-slot">Foto kegiatan 1<br>menyusul</div>
+      <figure class="foto-slot foto-riil">
+        <img src="foto/pemandangan.jpg" alt="Pengunjung duduk di atas bangku bambu menikmati kabut pagi" loading="lazy">
+        <figcaption>Menikmati kabut pagi dari atas bukit</figcaption>
+      </figure>
       <div class="foto-slot">Foto kegiatan 2<br>menyusul</div>
       <div class="foto-slot">Foto kegiatan 3<br>menyusul</div>
       <div class="foto-slot">Foto kegiatan 4<br>menyusul</div>
@@ -174,18 +223,16 @@
 
   <section id="video">
     <h2>Video Kegiatan Wisata</h2>
-    <div class="video-wrap">
-      <iframe
-        src="https://drive.google.com/file/d/1QBB7keKr22TvTXhZlY41shgzt4roztX2/preview"
-        title="Video Kegiatan Wisata Terasering Panyaweuyan"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen></iframe>
+    <div class="video-wrap portrait">
+      <video controls playsinline preload="metadata" poster="foto/pemandangan.jpg">
+        <source src="wisata.mp4" type="video/mp4">
+        Browser kamu tidak mendukung pemutaran video.
+      </video>
     </div>
     <p class="video-note">
-      Video diunggah melalui Google Drive.
+      Video dokumentasi kegiatan wisata.
       <a href="https://drive.google.com/file/d/1QBB7keKr22TvTXhZlY41shgzt4roztX2/view?usp=sharing"
-         target="_blank" rel="noopener">Buka di tab baru</a>
-      jika video tidak tampil (pastikan akses video disetel publik).
+         target="_blank" rel="noopener">Buka video asli di Google Drive</a>.
     </p>
   </section>
 
