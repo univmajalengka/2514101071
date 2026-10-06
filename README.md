@@ -24,9 +24,10 @@ menggunakan HTML, yang berisi:
 
 ```
 Tugas Pertemuan 3/
-├── index.html          # Halaman promosi wisata
-├── foto/pemandangan.jpg # Foto kegiatan wisata
-└── wisata.mp4           # Video kegiatan wisata
+├── index.html              # Halaman promosi wisata
+├── foto/pemandangan.jpg    # Foto kegiatan wisata
+├── foto/panorama.jpg       # Foto kegiatan wisata
+└── wisata.mp4              # Video kegiatan wisata
 ```
 
 Buka [`Tugas Pertemuan 3/index.html`](./Tugas%20Pertemuan%203/index.html) untuk melihat halamannya.
