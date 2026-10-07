@@ -3,189 +3,420 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terasering Panyaweuyan - Majalengka</title>
+<title>Wisata Terasering Panyaweuyan | Majalengka, Jawa Barat</title>
+<meta name="description" content="Wisata terasering Panyaweuyan di kaki Gunung Ciremai, Majalengka. Galeri foto, video kegiatan, paket wisata, dan lokasi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="foto/pemandangan.jpg">
 <style>
   :root {
     --hijau: #2f6b3a;
     --hijau-tua: #1e4726;
+    --hijau-pekat: #14301b;
     --emas: #d9a441;
+    --emas-gelap: #8a6520;
     --krem: #fbf7ee;
-    --abu: #6b7280;
+    --krem-2: #f3ede0;
+    --tinta: #22301f;
+    --redup: #5b6660;
+    --kartu: #ffffff;
+    --garis: #e6dfd0;
+    --bayang: 0 6px 22px rgba(30, 71, 38, .10);
+    --radius: 14px;
+    --radius-kecil: 8px;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    color: #24302a;
-    background: var(--krem);
-    line-height: 1.6;
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --krem: #12180f;
+      --krem-2: #1a2218;
+      --tinta: #e9efe6;
+      --redup: #a3b0a0;
+      --kartu: #1b231a;
+      --garis: #2c3629;
+      --bayang: 0 6px 22px rgba(0, 0, 0, .35);
+    }
   }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Plus Jakarta Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--tinta);
+    background: var(--krem);
+    line-height: 1.65;
+  }
+  img { max-width: 100%; }
+  .wadah { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Navigasi ---------- */
   header {
-    background: linear-gradient(rgba(30,71,38,.85), rgba(30,71,38,.85)),
-                repeating-linear-gradient(135deg, #3c7d47 0 22px, #47904f 22px 44px);
-    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(20, 48, 27, .92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
   }
   nav {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 18px 20px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px 22px;
     align-items: center;
     justify-content: space-between;
-  }
-  .brand { font-weight: 700; letter-spacing: .5px; }
-  nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 16px; }
-  nav a { color: #eaf5ec; text-decoration: none; font-size: .95rem; }
-  nav a:hover { color: var(--emas); }
-
-  .hero {
-    max-width: none;
+    gap: 16px;
+    min-height: 64px;
     position: relative;
-    background: url("foto/pemandangan.jpg") center 62%/cover no-repeat, var(--hijau-tua);
-    color: #fff;
-    text-align: center;
-    padding: 110px 20px 84px;
-    overflow: hidden;
   }
-  .hero::before {
+  .brand {
+    font-weight: 800;
+    letter-spacing: .3px;
+    color: #fff;
+    font-size: 1.02rem;
+    white-space: nowrap;
+  }
+  .brand span { color: var(--emas); }
+  .menu {
+    list-style: none;
+    display: flex;
+    gap: 4px;
+  }
+  .menu a {
+    display: block;
+    color: #dce9de;
+    text-decoration: none;
+    font-size: .92rem;
+    font-weight: 500;
+    padding: 8px 13px;
+    border-radius: 999px;
+    transition: background .2s ease, color .2s ease;
+  }
+  .menu a:hover { color: var(--emas); background: rgba(255, 255, 255, .07); }
+  .menu a.aktif { color: var(--emas); background: rgba(255, 255, 255, .09); }
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: var(--radius-kecil);
+    color: #fff;
+    width: 42px;
+    height: 38px;
+    cursor: pointer;
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+
+  /* ---------- Hero + slideshow ---------- */
+  .hero {
+    position: relative;
+    min-height: 92dvh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--hijau-pekat);
+    color: #fff;
+    padding: 120px 0 72px;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.1s ease;
+  }
+  .slide.aktif { opacity: 1; }
+  .hero::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(15,40,22,.35), rgba(15,40,22,.8));
+    background: linear-gradient(180deg, rgba(12, 32, 18, .55) 0%, rgba(12, 32, 18, .35) 45%, rgba(12, 32, 18, .85) 100%);
   }
-  .hero > * { position: relative; z-index: 1; }
-  .hero h1 {
-    font-size: 2.4rem;
-    color: #fff;
-    text-shadow: 0 2px 16px rgba(0,0,0,.5);
-    margin-top: 6px;
+  .hero-konten {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
   }
-  .hero p { color: rgba(255,255,255,.92); max-width: 640px; margin: 12px auto 0; }
   .tag {
     display: inline-block;
-    margin-bottom: 12px;
-    padding: 4px 14px;
-    border: 1px solid rgba(255,255,255,.75);
+    margin-bottom: 16px;
+    padding: 5px 16px;
+    border: 1px solid rgba(255, 255, 255, .7);
     border-radius: 999px;
-    background: rgba(0,0,0,.28);
-    color: #fff;
-    font-size: .82rem;
+    background: rgba(10, 25, 15, .35);
+    font-size: .76rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
+  }
+  .hero h1 {
+    font-size: clamp(2.3rem, 6vw, 3.9rem);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    font-weight: 800;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, .4);
+  }
+  .hero p {
+    margin-top: 16px;
+    max-width: 560px;
+    color: rgba(255, 255, 255, .93);
+    font-size: 1.05rem;
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 999px;
+    font-size: .95rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn-utama {
+    background: var(--emas);
+    color: var(--hijau-pekat);
+    box-shadow: 0 6px 18px rgba(217, 164, 65, .35);
+  }
+  .btn-utama:hover { background: #e6b454; transform: translateY(-1px); }
+  .btn-rujuk {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .65);
+    background: rgba(10, 25, 15, .3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .btn-rujuk:hover { background: rgba(255, 255, 255, .15); }
+  .btn:focus-visible, .menu a:focus-visible, .lb-btn:focus-visible, .dot:focus-visible {
+    outline: 2px solid var(--emas);
+    outline-offset: 3px;
   }
 
-  section { max-width: 1000px; margin: 0 auto; padding: 26px 20px; }
+  .dots {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    bottom: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(255, 255, 255, .45);
+    cursor: pointer;
+    padding: 0;
+    transition: width .25s ease, background .25s ease;
+  }
+  .dot.aktif { width: 26px; background: var(--emas); }
+
+  /* ---------- Section umum ---------- */
+  section { scroll-margin-top: 76px; }
+  .blok { padding: 72px 0 8px; }
   h2 {
-    font-size: 1.4rem;
+    font-size: clamp(1.5rem, 3vw, 1.95rem);
     color: var(--hijau-tua);
     border-left: 5px solid var(--emas);
-    padding-left: 12px;
-    margin-bottom: 18px;
+    padding-left: 14px;
+    line-height: 1.2;
+    letter-spacing: -.01em;
   }
-
-  .foto-slot, .kartu-gambar {
-    background: #e8e3d6;
-    border: 2px dashed #b9b1a0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--abu);
-    text-align: center;
-    font-size: .9rem;
+  @media (prefers-color-scheme: dark) {
+    h2 { color: #bfe0c5; }
   }
-  .foto-slot { aspect-ratio: 16/10; border-radius: 8px; }
+  .petunjuk { color: var(--redup); font-size: .92rem; margin-top: 10px; }
 
+  /* ---------- Galeri ---------- */
+  .galeri {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 22px;
+    max-width: 860px;
+  }
   .foto-riil {
     position: relative;
     display: block;
     padding: 0;
     border: 0;
     overflow: hidden;
-    box-shadow: 0 4px 14px rgba(0,0,0,.12);
+    border-radius: var(--radius);
+    box-shadow: var(--bayang);
+    cursor: zoom-in;
+    aspect-ratio: 3 / 4;
+    background: var(--krem-2);
   }
   .foto-riil img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 72%;
     display: block;
-    transition: transform .4s ease;
+    transition: transform .45s ease;
   }
-  .foto-riil:hover img { transform: scale(1.05); }
-  .foto-riil { cursor: zoom-in; }
+  .foto-riil:hover img { transform: scale(1.04); }
   .foto-riil figcaption {
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    padding: 34px 14px 12px;
-    background: linear-gradient(transparent, rgba(0,0,0,.75));
+    padding: 42px 16px 13px;
+    background: linear-gradient(transparent, rgba(8, 20, 12, .82));
     color: #fff;
-    font-size: .88rem;
+    font-size: .9rem;
+    font-weight: 500;
     text-align: left;
   }
 
-  .galeri {
+  /* ---------- Video ---------- */
+  .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 22px;
   }
-
+  .video-kartu { display: flex; flex-direction: column; gap: 10px; }
   .video-wrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/9;
+    aspect-ratio: 9 / 16;
     background: #000;
-    border-radius: 10px;
+    border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0,0,0,.25);
-    margin: 0 auto;
+    box-shadow: var(--bayang);
   }
-  .video-wrap.portrait { aspect-ratio: 9/16; max-width: 400px; }
   .video-wrap video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    background: #000;
   }
-  .video-note { font-size: .85rem; color: var(--abu); margin-top: 10px; }
+  .video-kartu figcaption {
+    font-size: .9rem;
+    color: var(--redup);
+    font-weight: 500;
+    text-align: center;
+  }
+  .video-note {
+    font-size: .88rem;
+    color: var(--redup);
+    margin-top: 20px;
+    text-align: center;
+  }
+  .video-note a { color: var(--hijau); font-weight: 600; }
+  @media (prefers-color-scheme: dark) { .video-note a { color: #86c792; } }
 
+  /* ---------- Paket ---------- */
   .paket {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 22px;
+    margin-top: 22px;
   }
   .kartu {
-    background: #fff;
-    border-radius: 10px;
+    background: var(--kartu);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    box-shadow: var(--bayang);
     display: flex;
     flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease;
   }
-  .kartu-gambar { aspect-ratio: 4/3; border: 0; border-bottom: 2px dashed #b9b1a0; }
-  .kartu-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .kartu:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(30, 71, 38, .14); }
+  .kartu-gambar {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--krem-2);
+  }
+  .kartu-gambar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .45s ease;
+  }
+  .kartu:hover .kartu-gambar img { transform: scale(1.05); }
+  .kartu-body {
+    padding: 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
   .kartu-body h3 { color: var(--hijau); font-size: 1.1rem; }
-  .kartu-body p { font-size: .93rem; color: #4b5563; flex: 1; }
-  .harga { font-weight: 700; color: #8a6520; }
+  @media (prefers-color-scheme: dark) { .kartu-body h3 { color: #86c792; } }
+  .kartu-body p { font-size: .93rem; color: var(--redup); flex: 1; }
+  .harga { font-weight: 800; color: var(--emas-gelap); }
+  @media (prefers-color-scheme: dark) { .harga { color: var(--emas); } }
 
+  /* ---------- Lokasi ---------- */
+  .lokasi-wrap {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 24px;
+    margin-top: 22px;
+    align-items: stretch;
+  }
+  .peta {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--garis);
+    box-shadow: var(--bayang);
+    min-height: 340px;
+    background: var(--krem-2);
+  }
+  .peta iframe { display: block; width: 100%; height: 100%; min-height: 340px; border: 0; }
+  .lokasi-info {
+    background: var(--kartu);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius);
+    padding: 26px 24px;
+    box-shadow: var(--bayang);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .lokasi-info h3 { color: var(--hijau-tua); font-size: 1.05rem; }
+  @media (prefers-color-scheme: dark) { .lokasi-info h3 { color: #bfe0c5; } }
+  .lokasi-info p { font-size: .94rem; color: var(--redup); }
+  .lokasi-info .btn { align-self: flex-start; margin-top: auto; }
+  .btn-hijau {
+    background: var(--hijau);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(47, 107, 58, .3);
+  }
+  .btn-hijau:hover { background: var(--hijau-tua); transform: translateY(-1px); }
+
+  /* ---------- Footer ---------- */
   footer {
-    background: var(--hijau-tua);
-    color: #d7e6d9;
+    background: var(--hijau-pekat);
+    color: #cfe0d2;
     text-align: center;
-    padding: 26px 20px;
-    margin-top: 30px;
+    padding: 40px 20px;
+    margin-top: 80px;
     font-size: .92rem;
   }
   footer strong { color: #fff; }
+  footer p + p { margin-top: 4px; }
+  .kredit {
+    margin-top: 16px;
+    font-size: .76rem;
+    color: #93a896;
+  }
 
-  /* Lightbox foto */
+  /* ---------- Lightbox ---------- */
   .lightbox {
     position: fixed;
     inset: 0;
     z-index: 60;
-    background: rgba(10,22,14,.93);
+    background: rgba(8, 18, 11, .94);
     display: none;
     align-items: center;
     justify-content: center;
@@ -193,16 +424,16 @@
   }
   .lightbox.tampil { display: flex; }
   .lightbox img {
-    max-width: min(92vw, 1100px);
+    max-width: min(92vw, 1000px);
     max-height: 82vh;
     border-radius: 10px;
-    box-shadow: 0 24px 60px rgba(0,0,0,.55);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
     object-fit: contain;
   }
   .lb-btn {
     position: absolute;
-    background: rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.35);
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .35);
     color: #fff;
     font-size: 1.3rem;
     line-height: 1;
@@ -215,7 +446,7 @@
     justify-content: center;
     transition: background .2s ease;
   }
-  .lb-btn:hover { background: rgba(255,255,255,.3); }
+  .lb-btn:hover { background: rgba(255, 255, 255, .3); }
   .lb-tutup { top: 18px; right: 18px; }
   .lb-sebelumnya { left: 18px; top: 50%; transform: translateY(-50%); }
   .lb-berikutnya { right: 18px; top: 50%; transform: translateY(-50%); }
@@ -227,76 +458,152 @@
     text-align: center;
     color: #fff;
     font-size: .95rem;
-    text-shadow: 0 1px 8px rgba(0,0,0,.7);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, .7);
     padding: 0 70px;
+  }
+
+  /* ---------- Responsif ---------- */
+  @media (max-width: 860px) {
+    .video-grid { grid-template-columns: 1fr; max-width: 360px; margin-inline: auto; }
+    .lokasi-wrap { grid-template-columns: 1fr; }
+    .hero { min-height: 88dvh; padding: 100px 0 64px; }
+  }
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: var(--hijau-pekat);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: var(--radius);
+      padding: 10px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+    }
+    .menu.buka { display: flex; }
+    .menu a { padding: 12px 14px; border-radius: var(--radius-kecil); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      transition-duration: .01ms !important;
+      animation-duration: .01ms !important;
+    }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <nav>
-    <span class="brand">Terasering Panyaweuyan</span>
-    <ul>
-      <li><a href="#beranda">Beranda</a></li>
-      <li><a href="#galeri">Galeri</a></li>
-      <li><a href="#paket">Paket Wisata</a></li>
-      <li><a href="#video">Video</a></li>
-      <li><a href="#kontak">Kontak</a></li>
+  <nav class="wadah" aria-label="Navigasi utama">
+    <span class="brand">Terasering <span>Panyaweuyan</span></span>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="menu" aria-label="Buka menu">&#9776;</button>
+    <ul class="menu" id="menu">
+      <li><a href="#beranda" class="nav-link">Beranda</a></li>
+      <li><a href="#galeri" class="nav-link">Galeri</a></li>
+      <li><a href="#video" class="nav-link">Video</a></li>
+      <li><a href="#paket" class="nav-link">Paket Wisata</a></li>
+      <li><a href="#lokasi" class="nav-link">Lokasi</a></li>
+      <li><a href="#kontak" class="nav-link">Kontak</a></li>
     </ul>
   </nav>
 </header>
 
 <main>
-  <section class="hero" id="beranda">
-    <span class="tag">Majalengka - Jawa Barat</span>
-    <h1>Terasering Panyaweuyan</h1>
-    <p>
-      Pesona hamparan sawah berterasering yang membentang di kaki Gunung Ciremai.
-      Nikmati udara sejuk, pemandangan hijau, dan suasana desa yang tenang
-      bersama keluarga maupun teman perjalanan.
-    </p>
+  <!-- ===== Hero + slideshow ===== -->
+  <section class="hero" id="beranda" aria-label="Terasering Panyaweuyan">
+    <div class="slide aktif" role="img" aria-label="Pengunjung duduk di bangku bambu menikmati kabut pagi"
+         style="background-image:url('foto/pemandangan.jpg'); background-position:center 62%;"></div>
+    <div class="slide" role="img" aria-label="Panorama perbukitan dari tepi jalan"
+         style="background-image:url('foto/panorama.jpg'); background-position:center 55%;"></div>
+    <div class="slide" role="img" aria-label="Kabut pagi di lereng terasering"
+         style="background-image:url('foto/slide-kabut.jpg'); background-position:center 45%;"></div>
+
+    <div class="wadah hero-konten">
+      <span class="tag">Majalengka &middot; Jawa Barat</span>
+      <h1>Terasering Panyaweuyan</h1>
+      <p>Hamparan sawah berterasering di kaki Gunung Ciremai &mdash; udara sejuk, panorama hijau, dan suasana desa yang tenang.</p>
+      <div class="hero-cta">
+        <a class="btn btn-utama" href="#galeri">Lihat Galeri</a>
+        <a class="btn btn-rujuk" href="#paket">Paket Wisata</a>
+      </div>
+    </div>
+
+    <div class="dots" id="dots" role="group" aria-label="Navigasi slideshow"></div>
   </section>
 
-  <section id="galeri">
-    <h2>Foto Kegiatan Wisata</h2>
-    <p style="color: var(--abu); font-size: .92rem; margin: -10px 0 16px;">Klik foto untuk memperbesar.</p>
+  <!-- ===== Galeri ===== -->
+  <section class="blok wadah" id="galeri">
+    <h2>Galeri Foto Kegiatan</h2>
+    <p class="petunjuk">Klik foto untuk memperbesar.</p>
     <div class="galeri">
-      <figure class="foto-slot foto-riil">
+      <figure class="foto-riil">
         <img src="foto/pemandangan.jpg" alt="Pengunjung duduk di atas bangku bambu menikmati kabut pagi" loading="lazy">
         <figcaption>Menikmati kabut pagi dari atas bukit</figcaption>
       </figure>
-      <figure class="foto-slot foto-riil">
-        <img src="foto/panorama.jpg" alt="Pengunjung duduk di tepi jalan memandang jajaran bukit" loading="lazy" style="object-position: center 58%;">
+      <figure class="foto-riil">
+        <img src="foto/panorama.jpg" alt="Pengunjung duduk di tepi jalan memandang jajaran bukit" loading="lazy" style="object-position:center 58%;">
         <figcaption>Panorama perbukitan dari tepi jalan</figcaption>
       </figure>
-      <div class="foto-slot">Foto kegiatan 3<br>menyusul</div>
-      <div class="foto-slot">Foto kegiatan 4<br>menyusul</div>
-      <div class="foto-slot">Foto kegiatan 5<br>menyusul</div>
-      <div class="foto-slot">Foto kegiatan 6<br>menyusul</div>
     </div>
   </section>
 
-  <section id="video">
+  <!-- ===== Video ===== -->
+  <section class="blok wadah" id="video">
     <h2>Video Kegiatan Wisata</h2>
-    <div class="video-wrap portrait">
-      <video controls playsinline preload="metadata" poster="foto/pemandangan.jpg">
-        <source src="wisata.mp4" type="video/mp4">
-        Browser kamu tidak mendukung pemutaran video.
-      </video>
+    <div class="video-grid">
+      <figure class="video-kartu">
+        <div class="video-wrap">
+          <video controls playsinline preload="metadata" poster="foto/poster-video-1.jpg">
+            <source src="wisata.mp4" type="video/mp4">
+            Browser kamu tidak mendukung pemutaran video.
+          </video>
+        </div>
+        <figcaption>Menikmati panorama terasering dari gazebo</figcaption>
+      </figure>
+      <figure class="video-kartu">
+        <div class="video-wrap">
+          <video controls playsinline preload="metadata" poster="foto/poster-video-2.jpg">
+            <source src="video-wisata-2.mp4" type="video/mp4">
+            Browser kamu tidak mendukung pemutaran video.
+          </video>
+        </div>
+        <figcaption>Menyapa matahari dari atas bukit</figcaption>
+      </figure>
+      <figure class="video-kartu">
+        <div class="video-wrap">
+          <video controls playsinline preload="metadata" poster="foto/poster-video-3.jpg">
+            <source src="video-wisata-3.mp4" type="video/mp4">
+            Browser kamu tidak mendukung pemutaran video.
+          </video>
+        </div>
+        <figcaption>Kabut pagi menyelimuti perbukitan</figcaption>
+      </figure>
     </div>
     <p class="video-note">
-      Video dokumentasi kegiatan wisata.
+      Dokumentasi kegiatan wisata.
       <a href="https://drive.google.com/file/d/1QBB7keKr22TvTXhZlY41shgzt4roztX2/view?usp=sharing"
          target="_blank" rel="noopener">Buka video asli di Google Drive</a>.
     </p>
   </section>
 
-  <section id="paket">
-    <h2>Daftar Paket Wisata</h2>
+  <!-- ===== Paket ===== -->
+  <!-- Kredit foto stok (Wikimedia Commons):
+       foto/paket-keluarga.jpg  - "Rice terraces, Bali" oleh Vyacheslav Argenberg, CC BY 4.0
+       foto/paket-sunrise.jpg   - "Mount Penanjakan at sunrise 2" oleh Dare2Leap, CC BY-SA 4.0
+       foto/paket-kuliner.jpg   - "Makanan khas Sunda" oleh Gaelen, CC BY 2.0
+       foto/slide-kabut.jpg     - "Tegallalang Rice Terraces Bali" oleh Philip Nalangan, CC BY 4.0 -->
+  <section class="blok wadah" id="paket">
+    <h2>Paket Wisata</h2>
     <div class="paket">
       <article class="kartu">
-        <div class="kartu-gambar">Foto paket<br>menyusul</div>
+        <div class="kartu-gambar">
+          <img src="foto/paket-keluarga.jpg" alt="Hamparan sawah terasering hijau" loading="lazy">
+        </div>
         <div class="kartu-body">
           <h3>Paket Santai Keluarga</h3>
           <p>
@@ -308,7 +615,9 @@
       </article>
 
       <article class="kartu">
-        <div class="kartu-gambar">Foto paket<br>menyusul</div>
+        <div class="kartu-gambar">
+          <img src="foto/paket-sunrise.jpg" alt="Matahari terbit di atas awan dari puncak bukit" loading="lazy">
+        </div>
         <div class="kartu-body">
           <h3>Paket Sunrise Trekking</h3>
           <p>
@@ -320,7 +629,9 @@
       </article>
 
       <article class="kartu">
-        <div class="kartu-gambar">Foto paket<br>menyusul</div>
+        <div class="kartu-gambar">
+          <img src="foto/paket-kuliner.jpg" alt="Lapak masakan khas Sunda dengan lauk pauk" loading="lazy">
+        </div>
         <div class="kartu-body">
           <h3>Paket Fotografi &amp; Kuliner</h3>
           <p>
@@ -332,12 +643,40 @@
       </article>
     </div>
   </section>
+
+  <!-- ===== Lokasi ===== -->
+  <section class="blok wadah" id="lokasi">
+    <h2>Lokasi &amp; Akses</h2>
+    <div class="lokasi-wrap">
+      <div class="peta">
+        <iframe
+          src="https://maps.google.com/maps?q=Terasering%20Panyaweuyan%20Majalengka&output=embed"
+          loading="lazy"
+          title="Peta lokasi Terasering Panyaweuyan, Majalengka"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+      <div class="lokasi-info">
+        <h3>Terasering Panyaweuyan</h3>
+        <p>
+          Berada di kaki Gunung Ciremai, Kabupaten Majalengka, Jawa Barat.
+          Akses menuju lokasi melalui jalan desa dengan pemandangan sawah
+          terasering sepanjang perjalanan.
+        </p>
+        <p>Buka setiap hari &middot; Nyaman dikunjungi pagi dan sore hari.</p>
+        <a class="btn btn-hijau"
+           href="https://www.google.com/maps/search/?api=1&query=Terasering+Panyaweuyan+Majalengka"
+           target="_blank" rel="noopener">Buka di Google Maps</a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer id="kontak">
-  <p><strong>Terasering Panyaweuyan</strong> - Majalengka, Jawa Barat</p>
-  <p>Disusun oleh Aulia Rahman - NPM 2514101071</p>
+  <p><strong>Terasering Panyaweuyan</strong> &mdash; Majalengka, Jawa Barat</p>
+  <p>Disusun oleh Aulia Rahman &middot; NPM 2514101071</p>
   <p>Program Studi Informatika, Fakultas Teknik, Universitas Majalengka</p>
+  <p class="kredit">Foto pendukung: Wikimedia Commons (Vyacheslav Argenberg, Dare2Leap, Gaelen, Philip Nalangan) &mdash; CC BY / CC BY-SA.</p>
 </footer>
 
 <!-- Lightbox foto -->
@@ -351,53 +690,117 @@
 
 <script>
 (function () {
+  var kurangGerak = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Menu mobile ---- */
+  var toggle = document.getElementById('menuToggle');
+  var menu = document.getElementById('menu');
+  toggle.addEventListener('click', function () {
+    var buka = menu.classList.toggle('buka');
+    toggle.setAttribute('aria-expanded', buka ? 'true' : 'false');
+  });
+  menu.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      menu.classList.remove('buka');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  /* ---- Slideshow hero ---- */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var dotsWadah = document.getElementById('dots');
+  var indeks = 0, jeda = null;
+
+  slides.forEach(function (s, i) {
+    var d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' aktif' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.addEventListener('click', function () { pindah(i); });
+    dotsWadah.appendChild(d);
+  });
+  var dots = Array.prototype.slice.call(dotsWadah.children);
+
+  function pindah(i) {
+    indeks = (i + slides.length) % slides.length;
+    slides.forEach(function (s, n) { s.classList.toggle('aktif', n === indeks); });
+    dots.forEach(function (d, n) { d.classList.toggle('aktif', n === indeks); });
+  }
+  function mulai() {
+    if (kurangGerak) return;
+    berhenti();
+    jeda = setInterval(function () { pindah(indeks + 1); }, 5000);
+  }
+  function berhenti() { if (jeda) { clearInterval(jeda); jeda = null; } }
+
+  document.addEventListener('visibilitychange', function () {
+    document.hidden ? berhenti() : mulai();
+  });
+  mulai();
+
+  /* ---- Lightbox galeri ---- */
   var foto = Array.prototype.slice.call(document.querySelectorAll('.foto-riil'));
-  if (!foto.length) return;
+  if (foto.length) {
+    var box = document.getElementById('lightbox');
+    var img = document.getElementById('lbImg');
+    var kap = document.getElementById('lbKap');
+    var idx = 0;
 
-  var box = document.getElementById('lightbox');
-  var img = document.getElementById('lbImg');
-  var kap = document.getElementById('lbKap');
-  var indeks = 0;
+    function tampilkan(i) {
+      idx = (i + foto.length) % foto.length;
+      var f = foto[idx];
+      var sumber = f.querySelector('img');
+      var judul = f.querySelector('figcaption');
+      img.src = sumber.src;
+      img.alt = sumber.alt;
+      kap.textContent = judul ? judul.textContent : '';
+      box.classList.add('tampil');
+      box.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function tutup() {
+      box.classList.remove('tampil');
+      box.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
 
-  function tampilkan(i) {
-    indeks = (i + foto.length) % foto.length;
-    var f = foto[indeks];
-    var sumber = f.querySelector('img');
-    var judul = f.querySelector('figcaption');
-    img.src = sumber.src;
-    img.alt = sumber.alt;
-    kap.textContent = judul ? judul.textContent : '';
-    box.classList.add('tampil');
-    box.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    foto.forEach(function (f, i) {
+      f.addEventListener('click', function () { tampilkan(i); });
+    });
+    document.getElementById('lbTutup').addEventListener('click', tutup);
+    document.getElementById('lbSebelumnya').addEventListener('click', function (e) {
+      e.stopPropagation(); tampilkan(idx - 1);
+    });
+    document.getElementById('lbBerikutnya').addEventListener('click', function (e) {
+      e.stopPropagation(); tampilkan(idx + 1);
+    });
+    box.addEventListener('click', function (e) {
+      if (e.target === box) tutup();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (!box.classList.contains('tampil')) return;
+      if (e.key === 'Escape') tutup();
+      if (e.key === 'ArrowLeft') tampilkan(idx - 1);
+      if (e.key === 'ArrowRight') tampilkan(idx + 1);
+    });
   }
 
-  function tutup() {
-    box.classList.remove('tampil');
-    box.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+  /* ---- Penanda menu aktif saat scroll ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+  var targets = links
+    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window && targets.length) {
+    var amati = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) {
+          a.classList.toggle('aktif', a.getAttribute('href') === '#' + en.target.id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    targets.forEach(function (t) { amati.observe(t); });
   }
-
-  foto.forEach(function (f, i) {
-    f.addEventListener('click', function () { tampilkan(i); });
-  });
-
-  document.getElementById('lbTutup').addEventListener('click', tutup);
-  document.getElementById('lbSebelumnya').addEventListener('click', function (e) {
-    e.stopPropagation(); tampilkan(indeks - 1);
-  });
-  document.getElementById('lbBerikutnya').addEventListener('click', function (e) {
-    e.stopPropagation(); tampilkan(indeks + 1);
-  });
-  box.addEventListener('click', function (e) {
-    if (e.target === box) tutup();
-  });
-  document.addEventListener('keydown', function (e) {
-    if (!box.classList.contains('tampil')) return;
-    if (e.key === 'Escape') tutup();
-    if (e.key === 'ArrowLeft') tampilkan(indeks - 1);
-    if (e.key === 'ArrowRight') tampilkan(indeks + 1);
-  });
 })();
 </script>
 
